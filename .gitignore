@@ -59,3 +59,8 @@ typings/
 
 # next.js build output
 .next
+
+# for project
+dist/
+package-lock.json
+/translate-demo/nbproject/private/

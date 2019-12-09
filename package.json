@@ -1,0 +1,49 @@
+{
+  "name": "@ssl-lib/react-translate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "node -e \"const fs = require('fs-extra');fs.removeSync('./dist');\"",
+    "build": "babel ./src --out-dir ./dist",
+    "dev": "nodemon -w ./src --exec yarn run eslint:fix && yarn run build",
+    "test": "echo 'Testes desativados'",
+    "predeploy": "npm i",
+    "prepublish": "npm run eslint && npm run test && npm run build",
+    "deploy": "npm publish --access=public",
+    "postdeploy": "git add . && git commit && git push",
+    "eslint": "eslint ./src",
+    "eslint:watch": "nodemon -w ./src --exec yarn run eslint",
+    "eslint:fix": "eslint ./src --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sillasleal/react-translate.git"
+  },
+  "author": "Sillas S. Leal <sillas.s.leal@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sillasleal/react-translate/issues"
+  },
+  "homepage": "https://github.com/sillasleal/react-translate#readme",
+  "devDependencies": {
+    "@babel/cli": "7.7.4",
+    "@babel/core": "7.7.4",
+    "@babel/plugin-proposal-class-properties": "7.7.4",
+    "@babel/plugin-transform-classes": "7.7.4",
+    "@babel/plugin-transform-regenerator": "7.7.4",
+    "@babel/plugin-transform-runtime": "7.7.4",
+    "@babel/preset-env": "7.7.4",
+    "@babel/preset-react": "7.7.4",
+    "babel-eslint": "10.0.3",
+    "eslint": "6.7.0",
+    "eslint-config-google": "0.14.0",
+    "eslint-plugin-react": "7.16.0",
+    "fs-extra": "8.1.0",
+    "nodemon": "2.0.1",
+    "prop-types": "15.7.2"
+  }
+}
