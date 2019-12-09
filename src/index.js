@@ -27,6 +27,7 @@ import InjectTranslate from './InjectTranslate';
 import SetLang from './SetLang';
 import Translate from './Translate';
 import TranslateProvider from './TranslateProvider';
+import getContext from './getContext';
 
 export default {
   AppendDicionary,
@@ -34,4 +35,5 @@ export default {
   SetLang,
   Translate,
   TranslateProvider,
+  getContext,
 };

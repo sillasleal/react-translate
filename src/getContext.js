@@ -24,6 +24,24 @@
 
 import {useContext} from 'react';
 /**/
-import TranslateContext from './TranslateContext';
+import {TranslateContext} from './TranslateContext';
 
-export default useContext(TranslateContext);
+const TranslateContexts = () => useContext(TranslateContext);
+const SetLang = (a) => useContext(TranslateContext).setLang(a);
+const Translate = (a, b, c, d) => useContext(TranslateContext)
+    .translate(a, b, c, d);
+const AppendDictionary = (a) => useContext(TranslateContext)
+    .appendDictionary(a);
+const Dictionary = () => useContext(TranslateContext).dictionary;
+const Language = () => useContext(TranslateContext).language;
+const Languages = (a) => useContext(TranslateContext).languages(a);
+
+export {
+  TranslateContexts as default,
+  SetLang as setLang,
+  Translate as translate,
+  AppendDictionary as appendDictionary,
+  Dictionary as dictionary,
+  Language as language,
+  Languages as languages,
+};

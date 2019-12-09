@@ -40,6 +40,10 @@ export default class TranslateProvider extends Component {
       language: 'pt-BR',
       languages: [],
     };
+    this.languages = this.languages.bind(this);
+    this.translate = this.translate.bind(this);
+    this.setLang = this.setLang.bind(this);
+    this.appendDictionary = this.appendDictionary.bind(this);
   }
 
   componentDidMount() {
@@ -58,8 +62,7 @@ export default class TranslateProvider extends Component {
       this.setState({
         language,
         languages: Array.isArray(languages) ?
-            languages.filter((i) => String.isValid(i)) :
-            [],
+            languages.filter((i) => String.isValid(i)) : [],
       });
     } else if (typeof language === 'undefined') {
       // Detect the browser language
@@ -122,6 +125,16 @@ export default class TranslateProvider extends Component {
   }
 
   /**
+   * Método que retorna todas a linguagens
+   * @param {Boolean} all Define se retorna todas ou apenas as válidas
+   * @return {Array} Retorna todas as linguagens cadastradas
+   */
+  languages(all) {
+    return Object.keys(this.state.dictionary)
+        .filter((i) => all ? true : i.indexOf('*') < 0);
+  }
+
+  /**
    * Método que realiza a tradução da palavra para o idioma selecionado
    * @param {String} key A chave referente a palavra
    * @param {object} params Os parametros a serem inseridos na string ou
@@ -177,9 +190,9 @@ export default class TranslateProvider extends Component {
       let newWord;
       let languagesArray = [...languages, errorLanguage];
       const dictionaries = Object.isObject(personalDict) ?
-        Object.assignDeep(dictionary, personalDict) :
-        {...dictionary};
-      const dictAsterisk = Object.readProp(dictionaries, '*', {});
+          Object.assignDeep(dictionary, personalDict) :
+          {...dictionary};
+      const dictAsterisk = Object.readProp(dictionaries, '*', { });
       /* Buscando a palavra nos diversos dicionários */
       if (String.isValid(language)) {
         languagesArray = [language, ...languagesArray];
@@ -195,12 +208,12 @@ export default class TranslateProvider extends Component {
       for (let i = 0; i < languagesArray.length; i++) {
         if (String.isValid(languagesArray[i])) {
           langOfAsterisk = languagesArray[i].indexOf('-') > -1 ?
-            languagesArray[i].split('-')[0] :
-            languagesArray[i];
+              languagesArray[i].split('-')[0] :
+              languagesArray[i];
           dictAsteriskOfLang = Object.readProp(
-              dictionaries, `${langOfAsterisk}-*`, {});
+              dictionaries, `${langOfAsterisk}-*`, { });
           dictOfLang = Object.readProp(
-              dictionaries, languagesArray[i], {});
+              dictionaries, languagesArray[i], { });
           word = dictOfLang[key] ||
               dictAsteriskOfLang[key] ||
               dictAsterisk[key];
@@ -282,10 +295,11 @@ export default class TranslateProvider extends Component {
   render() {
     const value = {
       language: this.state.language,
+      languages: this.languages,
       dictionary: this.state.dictionary,
-      translate: this.translate.bind(this),
-      setLang: this.setLang.bind(this),
-      appendDictionary: this.appendDictionary.bind(this),
+      translate: this.translate,
+      setLang: this.setLang,
+      appendDictionary: this.appendDictionary,
     };
     /**/
     return <TranslateContext.Provider value={value}>

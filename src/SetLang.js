@@ -23,12 +23,16 @@
  */
 import React from 'react';
 /**/
-import {Context} from './TranslateContext';
+import {TranslateContext} from './TranslateContext';
 
 /**
  * Componente que permite definir o idioma global
  * @return {Component} Um componente contendo o método setLang
  */
 export default ({children}) => typeof children === 'function' ?
-  <Consumer>{({setLang}) => children(setLang)}</Consumer> :
-  <Consumer>{({setLang}) => setLang(children)}</Consumer>;
+  <TranslateContext.Consumer>
+    {({setLang}) => children(setLang)}
+  </TranslateContext.Consumer> :
+  <TranslateContext.Consumer>
+    {({setLang}) => setLang(children)}
+  </TranslateContext.Consumer>;
