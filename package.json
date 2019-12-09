@@ -1,6 +1,6 @@
 {
   "name": "@ssl-lib/react-translate",
-  "version": "1.0.0",
+  "version": "1.0.101",
   "description": "",
   "main": "dist/",
   "files": [
@@ -45,5 +45,9 @@
     "fs-extra": "8.1.0",
     "nodemon": "2.0.1",
     "prop-types": "15.7.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "7.7.6",
+    "@ssl-lib/js-extras": "*"
   }
 }
